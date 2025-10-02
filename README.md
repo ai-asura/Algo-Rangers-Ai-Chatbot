@@ -1,25 +1,33 @@
 # 🤖 Algo Rangers AI Chatbot
 
-A full-featured AI chatbot application built with Streamlit, powered by Groq's AI models, and backed by PostgreSQL for persistent conversation storage.
+A full-featured AI customer support chatbot built with Streamlit, powered by Groq's AI models, and backed by PostgreSQL for persistent conversation storage.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://chatbot-template.streamlit.app/)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://algo-rangers-ai-chatbot.streamlit.app/)
+
+## 🌐 Live Demo
+
+**Access the live application**: [https://algo-rangers-ai-chatbot.streamlit.app/](https://algo-rangers-ai-chatbot.streamlit.app/)
+
+The application is automatically deployed to Streamlit Cloud via GitHub CI/CD. Any push to the `main` branch triggers an automatic deployment.
 
 ## ✨ Features
 
-- 🤖 **AI-Powered Conversations**: Uses Groq's latest AI models with dynamic model selection
-- 💾 **Persistent Storage**: All conversations saved to PostgreSQL database
-- 👤 **User Management**: Simple user session management
-- 📊 **Usage Statistics**: Track conversations and token usage
+- 🤖 **AI-Powered Customer Support**: Intelligent intent classification using Groq AI models
+- 🎯 **Smart Query Classification**: Automatically understands customer intent without hardcoded keywords
+- 🎫 **Ticket Management**: Create, track, and manage support tickets with unique IDs
+- 💾 **Persistent Storage**: All conversations and tickets saved to PostgreSQL database
+- 👤 **User Session Management**: Simple user onboarding and session tracking
 - 🔄 **Conversation History**: Load and continue previous conversations
-- 🎯 **Intelligent Model Selection**: Automatically selects the best available AI model
+- 📱 **Responsive Interface**: Clean, intuitive chat interface
 - 🔒 **Secure Configuration**: API keys and database credentials stored securely
 
 ## 🏗️ Architecture
 
 - **Frontend**: Streamlit for the web interface
-- **AI**: Groq API for language model inference
+- **AI**: Groq API for language model inference and intent classification
 - **Database**: PostgreSQL (Supabase) for data persistence
 - **Package Management**: uv for fast dependency management
+- **Deployment**: Streamlit Cloud with GitHub CI/CD integration
 
 ## 🚀 Quick Start
 
@@ -80,11 +88,26 @@ Tables are automatically created on first run.
 
 ## 🎛️ Usage
 
-1. **First Visit**: Enter your name and email (optional) to create a session
-2. **Start Chatting**: Type messages and get AI responses
-3. **View Stats**: See your conversation count and token usage in the sidebar
-4. **Load History**: Click "Load Previous Conversations" to continue old chats
-5. **Clear Chat**: Reset the current conversation
+1. **Visit the Live App**: Go to [https://algo-rangers-ai-chatbot.streamlit.app/](https://algo-rangers-ai-chatbot.streamlit.app/)
+2. **First Visit**: Enter your name and email (optional) to create a session
+3. **Start Chatting**: Use the chat interface for all support needs:
+   - Ask questions about shipping, refunds, returns
+   - Check ticket status by providing ticket ID
+   - Create support tickets for complex issues
+   - Get help with account or login problems
+4. **Clear Chat**: Use the sidebar button to reset the conversation
+
+## 🚀 Deployment & CI/CD
+
+### Automatic Deployment
+- **Live URL**: [https://algo-rangers-ai-chatbot.streamlit.app/](https://algo-rangers-ai-chatbot.streamlit.app/)
+- **Deployment**: Streamlit Cloud with GitHub integration
+- **CI/CD**: Automatic deployment on every push to `main` branch
+- **Requirements**: Uses `pyproject.toml` for dependency management as per project requirements
+
+### Manual Development Setup
+
+If you want to run locally for development:
 
 ## 🔧 Configuration
 
@@ -102,36 +125,55 @@ The app automatically selects the best available model from Groq based on:
 
 ## 📊 Features in Detail
 
-### Smart Model Selection
-- Dynamically queries Groq for available models
-- Scores models based on capabilities
-- Automatically falls back if preferred models are unavailable
-- Caches model list for performance
+### AI-Powered Intent Classification
+- Uses Groq AI models to understand customer queries without hardcoded keywords
+- Supports multiple intent categories: greetings, shipping, refunds, returns, login issues, etc.
+- Provides confidence scores and reasoning for classification decisions
+- Automatic fallback to keyword-based classification if AI is unavailable
 
-### Conversation Persistence
-- Every message and response saved to database
-- User statistics tracked (conversation count, tokens used)
-- Conversation history can be loaded across sessions
-- Secure session management with UUID
+### Customer Support Capabilities
+- **FAQ Handling**: Instant answers to common questions
+- **Ticket Creation**: Automated ticket generation with unique IDs (TCKT-YYYYMMDD-XXX format)
+- **Ticket Tracking**: Check status of existing support tickets
+- **Smart Escalation**: Knows when to escalate to human agents
 
-### User Experience
-- Clean, responsive interface
-- Real-time streaming responses
-- Error handling and recovery
-- Optional user profile information
+### Technical Features
+- **Smart Model Selection**: Dynamically queries Groq for available models and selects the best one
+- **Database Integration**: PostgreSQL with SQLAlchemy for robust data persistence
+- **Session Management**: Secure user sessions with UUID
+- **Error Handling**: Graceful handling of API limits and network issues
 
 ## 🛠️ Development
 
-Built with modern Python tools:
-- `uv` for fast package management
+Built with modern Python tools as per project requirements:
+- `uv` for fast package management (replacing pip)
 - `streamlit` for the web interface
-- `groq` for AI model access
+- `groq` for AI model access (replacing OpenAI)
 - `sqlalchemy` + `psycopg2` for database operations
+- **GitHub CI/CD** for automatic deployment to Streamlit Cloud
 
 ## 📝 License
 
-[Add your license information here]
+Apache License 2.0 - See LICENSE file for details
 
 ## 🤝 Contributing
 
-[Add contribution guidelines here]
+1. Fork the repository/or clone if you are invited
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request to branch 'main'
+
+**Note**: Pushes to `main` branch automatically deploy to [https://algo-rangers-ai-chatbot.streamlit.app/](https://algo-rangers-ai-chatbot.streamlit.app/)
+
+## 🚀 Project Requirements Compliance
+
+This project fulfills all requirements from the specification:
+- ✅ **Streamlit** frontend as requested
+- ✅ **Groq AI** instead of OpenAI for language models
+- ✅ **uv package manager** replacing pip for dependency management
+- ✅ **PostgreSQL** backend storage as recommended
+- ✅ **GitHub + Streamlit** deployment pipeline
+- ✅ **AI-powered intent classification** without hardcoded keywords
+- ✅ **Support ticket management** with proper ID format
+- ✅ **Session-based chat history** and user management
