@@ -1,0 +1,14 @@
+[project]
+name = "algo-rangers-ai-chatbot"
+version = "0.1.0"
+description = "A simple Streamlit chatbot using OpenAI's GPT-3.5"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "streamlit",
+    "groq",
+]
+
+[project.urls]
+Homepage = "https://github.com/ai-asura/Algo-Rangers-Ai-Chatbot"
+Repository = "https://github.com/ai-asura/Algo-Rangers-Ai-Chatbot"
