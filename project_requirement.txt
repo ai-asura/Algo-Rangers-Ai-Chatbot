@@ -1,0 +1,239 @@
+Requirement Document: Generative AI Chatbot for Customer Support
+
+1. Objective
+
+Build a basic chatbot using a Generative AI model (e.g., OpenAI GPT-4) that can converse naturally with users. The chatbot will be deployed as a web application with a REST API backend.
+The chatbot will serve as a first-line assistant for customer support, capable of responding to frequently asked questions, assisting users in generating support tickets, and escalating to human agents when necessary. The system is aimed at reducing the load on human agents by handling simple queries and ensuring seamless ticket creation for complex issues.
+Key features include:
+
+• FAQ Handling: Respond to frequent user questions (e.g., shipping, refund, return policy).
+• Ticket Creation: If the chatbot cannot resolve a user's issue, it will create a support ticket containing the user's message and a timestamp.
+• Ticket Acknowledgment: The chatbot will confirm ticket creation and share a ticket ID with the user.
+• Human Escalation: If needed, the chatbot can inform the user that their issue will be reviewed by a human support agent.
+
+2. High Level Flow of the Chatbot
+
+[Description of flowchart: The flowchart is divided into two main parts - User Interaction and Support Escalation.
+
+In User Interaction:
+- Starts with "User sends message or retry".
+- Goes to "Backend Processing: Backend API receives message".
+- Then to a decision diamond: "Can AI answer the query?"
+- If yes: "Use LLM to generate response" -> "Return response to frontend".
+- If no: Leads to Support Escalation.
+
+In Support Escalation:
+- "Create support ticket" -> "Save issue and timestamp" -> "Send ticket ID to user" -> "Notify human agent if needed".
+]
+
+3. Functional Requirements
+
+1. Use Case 1: Ask Information About a Support Ticket
+
+Input: Ticket ID from user
+Output: Return status message (stubbed/static for MVP)
+
+2. Use Case 2: Create a New Support Ticket
+
+Triggered when AI cannot resolve issue
+Generates ticket ID, stores issue message, and returns ID to user
+
+3. Use Case 3: View Chat History
+
+For MVP, basic session-level chat log shown (not persisted across refresh)
+
+In the Minimum Viable Product (MVP) version:
+
+• The chatbot will maintain the chat messages only for the current session.
+• The conversation is not stored in a database or file, so once the session ends (e.g., user refreshes the page, closes the browser, or times out), the chat history is lost.
+
+4. Sample Chat Conversation
+
+Use Case 1: Asking Information About a Support Ticket
+
+User: Hi, I want to check the status of my support ticket.
+Bot: Sure! Please provide your ticket ID.
+User: It's TCKT-20250722-008.
+Bot: Thank you. Your ticket TCKT-20250722-008 is currently being reviewed by our support team. You’ll receive an update shortly.
+
+Use Case 2: Request for Creating a New Support Ticket
+
+User: I’m unable to log into my account.
+Bot: I’m sorry to hear that. Would you like me to create a support ticket for you?
+User: Yes, please.
+Bot: Got it. I’ve created a support ticket for your issue. Your reference number is TCKT-20250723-001. Our support team will contact you soon.
+
+Use Case 3: View Chat History (Session-Based)
+
+User: Hi
+Bot: Hello! How can I help you today?
+
+User: I want to return the product.
+Bot: Sure, could you please share the product ID or describe the issue?
+
+User: It’s defective.
+Bot: I’ve logged a ticket for your return request. Ticket ID: TCKT-20250723-002. You’ll receive an update soon.
+
+(User scrolls up and sees the full session history above — messages are retained as long as the page remains open.)
+
+5. User Interface
+
+• Input box for user request
+• Submit button
+• Output box for chat response
+• Display chat history
+
+6. Recommended Tech Stack
+
+• Frontend:  Streamlit
+• Backend: Python
+• LLM Provider: Groq
+• Hosting: Streamlit
+• Backend Storage: Postgres
+• Deployment: GitHub + Streamlit
+
+7. Demo
+
+Support Assistant App - Streamlit
+
+8. Comprehensive Sample Questions for Testing
+
+The following sample questions cover all use cases and scenarios mentioned in this requirement document. These can be used for testing the AI-powered intent classification system and validating chatbot responses.
+
+8.1 Greetings & Initial Contact
+• Hi
+• Hello there!
+• Good morning, I need help
+• Hey, can you assist me?
+• Hello, I have a question about my order
+
+8.2 FAQ Handling - Shipping Questions
+• How long does shipping take?
+• When will my order arrive?
+• What are your delivery options?
+• I need tracking information for my package
+• Do you offer express shipping?
+• What's the difference between standard and express delivery?
+• My package hasn't arrived yet, where is it?
+
+8.3 FAQ Handling - Refund Questions
+• How do I get a refund?
+• What's your refund policy?
+• I want my money back for this order
+• How long does it take to process refunds?
+• Can I cancel my order and get refunded?
+• I was charged twice, I need a refund
+
+8.4 FAQ Handling - Return Policy Questions
+• How do I return an item?
+• What's your return policy?
+• Can I exchange this for a different size?
+• The product I received is defective, what should I do?
+• I received the wrong item, how do I return it?
+• Is there a time limit for returns?
+
+8.5 Use Case 1: Ticket Status Inquiries
+• Hi, I want to check the status of my support ticket
+• Can you check my ticket status?
+• What's the update on my ticket TCKT-20241002-001?
+• I need information about my support request
+• Has there been any progress on my ticket?
+• My ticket ID is TCKT-20241002-005, what's the status?
+• Check ticket TCKT-20241002-123 please
+
+8.6 Use Case 2: Issues Requiring Ticket Creation
+
+8.6.1 Login Issues
+• I'm unable to log into my account
+• I forgot my password and can't reset it
+• My account has been locked, I need help
+• The login page isn't working properly
+• I keep getting error messages when trying to sign in
+
+8.6.2 Account Problems
+• I need to update my billing information
+• How do I change my email address?
+• There's an issue with my account settings
+• I can't access my profile page
+• My account shows incorrect information
+
+8.6.3 Order Issues
+• There's a problem with my recent order
+• I was charged for an item I didn't receive
+• My order status shows delivered but I never got it
+• I need to modify my order details
+• Something is wrong with my order
+
+8.6.4 Technical Problems
+• The website is not loading properly
+• I'm experiencing technical difficulties
+• The checkout process is broken
+• Your app keeps crashing on my phone
+• I can't complete my purchase due to technical issues
+
+8.6.5 Complex Issues
+• I have multiple orders with different problems
+• This is a complicated billing and shipping issue
+• I need to discuss a serious problem with your service
+• I have a complex technical issue that's hard to explain
+• There are several problems I need help with
+
+8.7 Use Case 3: Mixed Conversations (Session History)
+
+Conversation Flow 1:
+User: "Hi"
+User: "I want to return this product"
+User: "It's damaged and doesn't work"
+
+Conversation Flow 2:
+User: "Hello, I have a question"
+User: "When will my order ship?"
+User: "Also, what's your return policy?"
+
+Conversation Flow 3:
+User: "Good morning"
+User: "I can't log into my account"
+User: "Yes, please create a ticket"
+User: "Thank you, what's my ticket number?"
+
+8.8 Edge Cases & Boundary Testing
+• Hi, I want to check the status of my support ticket but don't have the ID
+• I have both a shipping question and want to create a ticket
+• Hello, my order TCKT-20241002-001 has issues
+• Can you help me with TCKT-20241002-999?
+• I need immediate urgent help with my account
+• This is an emergency, my account was hacked
+• I'm very frustrated with your service
+• Multiple problems: shipping delay, wrong item, and billing error
+
+8.9 Ticket ID Formats (As per Requirements)
+• TCKT-20250722-008
+• TCKT-20250723-001
+• TCKT-20250723-002
+• TCKT-20241002-001
+• TCKT-20241002-005
+• TCKT-20241002-123
+
+8.10 Real-World Customer Scenarios
+• "I ordered a laptop but received a mouse instead"
+• "My credit card was charged but I never completed the purchase"
+• "The delivery driver left my package at the wrong address"
+• "I've been waiting 2 weeks for my order with no updates"
+• "Your customer service hasn't responded to my emails"
+• "I need to change my shipping address urgently"
+• "The product arrived broken during shipping"
+• "I accidentally ordered the wrong quantity"
+
+8.11 Testing Strategy
+
+These sample questions should be used to validate:
+
+• Intent Classification Accuracy - Does the AI correctly identify the user's intent?
+• Response Appropriateness - Does the chatbot provide relevant and helpful answers?
+• Ticket Creation Logic - When should support tickets be created vs. answered directly?
+• Session Management - How well does the system handle conversation flow and context?
+• Edge Case Handling - Complex, ambiguous, or multi-intent queries
+• FAQ Coverage - Ensure all frequently asked questions are properly addressed
+• Escalation Triggers - Verify when human agents should be involved
+
+Note: These samples cover all requirements from this document and will help validate that the AI-powered classification system works correctly across all customer support scenarios.
